@@ -116,7 +116,7 @@ class ReactRenderExtension extends AbstractExtension
         return $rendered;
     }
 
-    public function reactRenderComponent(string $componentName, array $options = array()): string
+    public function reactRenderComponent(string $componentName, array $options = array(), string $className=""): string
     {
         $props = isset($options['props']) ? $options['props'] : array();
         $propsArray = is_array($props) ? $props : $this->jsonDecode($props);
@@ -143,7 +143,7 @@ class ReactRenderExtension extends AbstractExtension
                 $str .= $tmpData;
             }
         }
-        $str .= '<div id="'.$data['dom_id'].'">';
+        $str .= '<div class="'.$className.'"id="'.$data['dom_id'].'">';
         if ($this->shouldRenderServerSide($options)) {
             $rendered = $this->serverSideRender($data, $options);
             $evaluated = $rendered['evaluated'];
